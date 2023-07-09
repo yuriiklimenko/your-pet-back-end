@@ -1,0 +1,1294 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger Petstore - OpenAPI 3.0",
+    "description": "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about\nSwagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!\nYou can now help us improve the API whether it's by making changes to the definition itself or to the code.\nThat way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\n_If you're looking for the Swagger 2.0/OAS 2.0 version of Petstore, then click [here](https://editor.swagger.io/?url=https://petstore.swagger.io/v2/swagger.yaml). Alternatively, you can load via the `Edit > Load Petstore OAS 2.0` menu option!_\n\nSome useful links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n- [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "https//:localhost:3000"
+    },
+    {
+      "url": "https://project-7-backend.onrender.com/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "user",
+      "description": "Operations about user"
+    },
+    {
+      "name": "notices",
+      "description": "Operations about notices"
+    },
+    {
+      "name": "pets",
+      "description": "Operations about pets"
+    }
+  ],
+  "paths": {
+    "/api/pets": {
+      "post": {
+        "tags": ["pets"],
+        "summary": "Creates list of pets",
+        "description": "",
+        "operationId": "",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "description": "Pets object",
+          "required": "true",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetsAddRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetsAddResponses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/api/pets/{petId}": {
+      "delete": {
+        "tags": ["pets"],
+        "summary": "Delete list of pets",
+        "description": "",
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "contact deleted"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/api/notices/": {
+      "get": {
+        "tags": ["notices"],
+        "summary": "Found notices with pagination",
+        "description": "",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Number page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": "1",
+              "default": "1"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": "10",
+              "default": "10"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeGetResponseArray"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["notices"],
+        "summary": "Add notices",
+        "description": "",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetsArray"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/api/notices/notice/{noticeId}": {
+      "get": {
+        "tags": ["notices"],
+        "summary": "Found notices by ID",
+        "description": "",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "noticeId",
+            "in": "path",
+            "description": "ID pet",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetsAddResponses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/api/notices/category/{category}": {
+      "get": {
+        "tags": ["notices"],
+        "summary": "Found notices by CATEGORY",
+        "description": "",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "noticeCategory",
+            "in": "path",
+            "description": "Category noticed",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "inGoodHands",
+              "enum": [
+                "sell",
+                "lostFound",
+                "inGoodHands",
+                "favoriteAdds",
+                "myAds"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetsArray"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/api/notices/search/{category}": {
+      "get": {
+        "tags": ["notices"],
+        "summary": "Found notices by CATEGORY and Search",
+        "description": "",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "searchQuery",
+            "in": "query",
+            "description": "Search query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "noticeCategory",
+            "in": "path",
+            "description": "Category noticed",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "inGoodHands",
+              "enum": [
+                "sell",
+                "lostFound",
+                "inGoodHands",
+                "favoriteAdds",
+                "myAds"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetsArray"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/api/notices/favorite/{noticeId}": {
+      "patch": {
+        "tags": ["notices"],
+        "summary": "Add notices to favorite",
+        "description": "",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "noticeId",
+            "in": "path",
+            "description": "ID notices",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Is not valid Id",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/api/notices/favorites/": {
+      "get": {
+        "tags": ["notices"],
+        "summary": "Get notices avorite",
+        "description": "",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeGetResponseArray"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/api/myads": {
+      "get": {
+        "tags": ["notices"],
+        "summary": "Get my ads",
+        "description": "",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeGetResponseArray"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/api/myads/{noticeId}": {
+      "delete": {
+        "tags": ["notices"],
+        "summary": "Delete my ads",
+        "description": "",
+        "operationId": "",
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "deleteId",
+            "in": "path",
+            "description": "ID myPet",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "contact deleted"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/users/register": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Creates list of users with given input array",
+        "description": "",
+        "operationId": "createUsersWithListInput",
+        "requestBody": {
+          "description": "Login object",
+          "required": "true",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserRegisterRequest"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          },
+          "500": {
+            "description": "Iternal server error"
+          },
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Logs user into the system",
+        "description": "",
+        "operationId": "loginUser",
+        "parameters": [],
+        "requestBody": {
+          "description": "Login object",
+          "required": "true",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "401": {
+            "description": "Email or password is wrong",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/users/current": {
+      "get": {
+        "tags": ["user"],
+        "summary": "Logs out current logged in user session",
+        "description": "",
+        "operationId": "current",
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserCurrentResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/users/logout": {
+      "get": {
+        "tags": ["user"],
+        "summary": "Logs out current logged in user session",
+        "description": "",
+        "operationId": "logoutUser",
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserLogoutResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/users/data": {
+      "patch": {
+        "tags": ["user"],
+        "summary": "Add or change data user",
+        "description": "",
+        "operationId": "",
+        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "description": "Login object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDataUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDataUpdate"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/users/avatar": {
+      "patch": {
+        "tags": ["user"],
+        "summary": "Add or change user avatar",
+        "description": "",
+        "operationId": "",
+        "security": [{ "Bearer": [] }],
+        "consumes": "multipart/form-data",
+        "parameters": [
+          {
+            "name": "baerer token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "type": "file",
+            "description": "The file to uppload"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAvatarUpdate"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error Message",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    },
+    "/users/{username}": {
+      "put": {
+        "tags": ["user"],
+        "summary": "Update user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "name that need to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent user in the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["user"],
+        "summary": "Delete user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Iternal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "NoticeGetResponseArray": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "required": "true"
+            },
+            "location": {
+              "type": "string",
+              "required": "true",
+              "example": "Mariupol"
+            },
+            "age": {
+              "type": "string"
+            },
+            "sex": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UserAvatarUpdate": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "required": "true"
+            },
+            "avatarUrl": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "PetsArray": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "required": "true"
+            },
+            "title": {
+              "type": "string",
+              "required": "true",
+              "expamle": "Cute dog looking for a home"
+            },
+            "name": {
+              "type": "string",
+              "required": "true",
+              "expamle": "Rich"
+            },
+            "category": {
+              "type": "string",
+              "required": "true"
+            },
+            "favorite": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "location": {
+              "type": "string",
+              "required": "true",
+              "example": "Mariupol"
+            },
+            "age": {
+              "type": "string"
+            },
+            "sex": {
+              "type": "string"
+            },
+            "breed": {
+              "type": "string"
+            },
+            "price": {
+              "type": "string"
+            },
+            "comments": {
+              "type": "string"
+            },
+            "owner": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "PetsAddResponses": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "required": "true"
+          },
+          "title": {
+            "type": "string",
+            "required": "true",
+            "expamle": "Cute dog looking for a home"
+          },
+          "name": {
+            "type": "string",
+            "required": "true",
+            "expamle": "Rich"
+          },
+          "category": {
+            "type": "string",
+            "required": "true"
+          },
+          "favorite": {
+            "type": "array",
+            "default": "false",
+            "items": {
+              "type": "string"
+            }
+          },
+          "location": {
+            "type": "string",
+            "required": "true",
+            "example": "Mariupol"
+          },
+          "age": {
+            "type": "string"
+          },
+          "sex": {
+            "type": "string"
+          },
+          "breed": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "comments": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          }
+        }
+      },
+      "PetsAddRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "required": "true",
+            "expamle": "Cute dog looking for a home"
+          },
+          "name": {
+            "type": "string",
+            "required": "true",
+            "expamle": "Rich"
+          },
+          "category": {
+            "type": "string",
+            "required": "true"
+          },
+          "favorite": {
+            "type": "array",
+            "default": "false",
+            "items": {
+              "type": "string"
+            }
+          },
+          "location": {
+            "type": "string",
+            "required": "true",
+            "example": "Mariupol"
+          },
+          "age": {
+            "type": "string"
+          },
+          "sex": {
+            "type": "string"
+          },
+          "breed": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "comments": {
+            "type": "string"
+          }
+        }
+      },
+      "UserCurrentResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@email.com"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "UserDataUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@email.com"
+          },
+          "birthday": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          }
+        }
+      },
+      "UserLogoutResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Logout sucess"
+          }
+        }
+      },
+      "UserLoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": "true",
+            "example": "john@email.com"
+          },
+          "password": {
+            "type": "string",
+            "required": "true",
+            "example": "12345"
+          }
+        }
+      },
+      "UserLoginResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "UserRegisterRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "john@email.com"
+          },
+          "success": {
+            "type": "string",
+            "example": "true"
+          }
+        }
+      },
+
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "##default"
+        }
+      }
+    },
+
+    "requestBodies": {
+      "Pet": {
+        "description": "Pet object that needs to be added to the store",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Pet"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Pet"
+            }
+          }
+        }
+      },
+      "RegistrationRequest": {
+        "description": "User descriptions",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "UserArray": {
+        "description": "List of user object",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "schema": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
